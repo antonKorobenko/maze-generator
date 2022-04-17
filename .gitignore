@@ -1,3 +1,4 @@
 Mazes
 .DS_Store
 *.cpython*
+__pycache__

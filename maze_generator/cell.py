@@ -1,8 +1,8 @@
 class Cell():
 
-    def __init__(self, x_coordinate: int, y_coordinate: int) -> None:
-        self.x = x_coordinate
-        self.y = y_coordinate
+    def __init__(self, row: int, column: int) -> None:
+        self.x = row
+        self.y = column
         self.walls = {
             "N": True,
             "S": True,
@@ -14,3 +14,5 @@ class Cell():
     def remove_wall(self, wall: str) -> None:
         self.walls[wall] = False
         self.walled_aroud = False
+
+    # methods for pygame
