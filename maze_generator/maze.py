@@ -2,7 +2,7 @@ import os
 import random
 import colorama
 from colorama import Back
-from cell import Cell
+from .cell import Cell
 
 
 WALL_PAIRS = {
@@ -20,6 +20,7 @@ def remove_wall_for_adjacent_cells(cell_1: Cell, cell_2: Cell, wall: str) -> Non
 
 
 class Maze():
+
     def __init__(self, n: int, m: int, x_start=0, y_start=0) -> None:
         self.rows_num = n
         self.columns_num = m
@@ -147,3 +148,28 @@ class Maze():
             print(f'<line x1="0" y1="0" x2="{width}" y2="0"/>', file=f)
             print(f'<line x1="0" y1="0" x2="0" y2="{height}"/>', file=f)
             print('</svg>', file=f)
+
+    def get_maze_as_boolean_matrix(self) -> list[list[bool]]:
+        matrix= [[1] * (self.rows_num * 2 + 1)]
+        
+        for y in range(self.columns_num):
+            row = [1]
+            for x in range(self.rows_num):
+                if self.maze_map[x][y].walls["E"]:
+                    row.append(0)
+                    row.append(1)
+                else:
+                    row.append(0)
+                    row.append(0)
+            matrix.append(row)
+            row = [1]
+            for x in range(self.rows_num):
+                if self.maze_map[x][y].walls["S"]:
+                    row.append(1)
+                    row.append(1)
+                else:
+                    row.append(0)
+                    row.append(1)
+            matrix.append(row)
+        
+        return matrix
